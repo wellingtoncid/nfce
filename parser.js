@@ -80,14 +80,25 @@ class NfceParser {
             }
             
             if (detalhesRow && detalhesRow.classList.contains('toggable')) {
-                // Extrai NCM e código do produto
-                const ncmMatch = detalhesRow.textContent.match(/Código NCM\s*:\s*([0-9]+)/) || 
-                                detalhesRow.textContent.match(/Código NCM\s*([0-9]+)/);
-                ncm = ncmMatch ? ncmMatch[1] : '';
-                
-                const codigoMatch = detalhesRow.textContent.match(/Código do Produto\s*:\s*([^\s]+)/) || 
-                                   detalhesRow.textContent.match(/Código do Produto\s*([^\s]+)/);
-                codigo = codigoMatch ? codigoMatch[1] : '';
+                const spans = detalhesRow.querySelectorAll('label');
+                for (let i = 0; i < spans.length; i++) {
+                    const label = spans[i];
+                    const text = label.textContent.trim();
+
+                    if (text === 'Código do Produto') {
+                        const span = label.nextElementSibling;
+                        if (span && span.tagName === 'SPAN') {
+                            codigo = span.textContent.trim();
+                        }
+                    }
+
+                    if (text === 'Código NCM') {
+                        const span = label.nextElementSibling;
+                        if (span && span.tagName === 'SPAN') {
+                            ncm = span.textContent.trim();
+                        }
+                    }
+                }
             }
             
             produtos.push({
