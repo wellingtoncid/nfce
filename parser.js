@@ -107,7 +107,7 @@ class NfceParser {
 
     getTextContent(xpath) {
         try {
-            const result = document.evaluate(xpath, this.doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            const result = this.doc.evaluate(xpath, this.doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
             return result.singleNodeValue ? result.singleNodeValue.textContent.trim() : '';
         } catch (e) {
             console.error('XPath error:', e);
