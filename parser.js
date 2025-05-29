@@ -6,25 +6,36 @@ class NfceParser {
     }
 
     getEmitente() {
-        // Método mais robusto para encontrar os dados do emitente
-        const emitenteSection = this.doc.querySelector('fieldset:has(legend:contains("Emitente"))');
-        if (!emitenteSection) return {};
-        
-        const getField = (labelText) => {
-            const label = Array.from(emitenteSection.querySelectorAll('label'))
-                .find(el => el.textContent.includes(labelText));
-            return label ? label.nextElementSibling.textContent.trim() : '';
-        };
+    // Alternativa compatível ao uso de :has() e :contains()
+    const fieldsets = this.doc.querySelectorAll('fieldset');
+    let emitenteSection = null;
 
-        return {
-            nome: getField('Nome / Razão Social'),
-            cnpj: getField('CNPJ'),
-            ie: getField('Inscrição Estadual'),
-            endereco: getField('Endereço'),
-            municipio: getField('Município'),
-            uf: getField('UF')
-        };
-    }
+    fieldsets.forEach(fieldset => {
+        const legend = fieldset.querySelector('legend');
+        if (legend && legend.textContent.trim().includes('Emitente')) {
+            emitenteSection = fieldset;
+        }
+    });
+
+    if (!emitenteSection) return {};
+
+    const getField = (labelText) => {
+        const label = Array.from(emitenteSection.querySelectorAll('label'))
+            .find(el => el.textContent.includes(labelText));
+        return label && label.nextElementSibling
+            ? label.nextElementSibling.textContent.trim()
+            : '';
+    };
+
+    return {
+        nome: getField('Nome / Razão Social'),
+        cnpj: getField('CNPJ'),
+        ie: getField('Inscrição Estadual'),
+        endereco: getField('Endereço'),
+        municipio: getField('Município'),
+        uf: getField('UF')
+    };
+}
 
     getDadosNfe() {
         // Extrai os dados principais da NFC-e
