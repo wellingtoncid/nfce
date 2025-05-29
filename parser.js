@@ -1,129 +1,109 @@
-class NfceParser {
+import { JSDOM } from 'jsdom';
+
+export class NfceParser {
+    doc;
+
     constructor(htmlContent) {
-        this.htmlContent = htmlContent;
-        this.parser = new DOMParser();
-        this.doc = this.parser.parseFromString(htmlContent, "text/html");
+        const dom = new JSDOM(htmlContent);
+        this.doc = dom.window.document;
     }
 
     getEmitente() {
-    // Alternativa compatível ao uso de :has() e :contains()
-    const fieldsets = this.doc.querySelectorAll('fieldset');
-    let emitenteSection = null;
+        const fieldsets = this.doc.querySelectorAll('fieldset');
+        let emitenteSection = null;
 
-    fieldsets.forEach(fieldset => {
-        const legend = fieldset.querySelector('legend');
-        if (legend && legend.textContent.trim().includes('Emitente')) {
-            emitenteSection = fieldset;
-        }
-    });
+        fieldsets.forEach(fieldset => {
+            const legend = fieldset.querySelector('legend');
+            if (legend && legend.textContent.trim().includes('Emitente')) {
+                emitenteSection = fieldset;
+            }
+        });
 
-    if (!emitenteSection) return {};
+        if (!emitenteSection) return {};
 
-    const getField = (labelText) => {
-        const label = Array.from(emitenteSection.querySelectorAll('label'))
-            .find(el => el.textContent.includes(labelText));
-        return label && label.nextElementSibling
-            ? label.nextElementSibling.textContent.trim()
-            : '';
-    };
+        const getField = (labelText) => {
+            const label = Array.from(emitenteSection.querySelectorAll('label'))
+                .find(el => el.textContent.includes(labelText));
+            return label && label.nextElementSibling
+                ? label.nextElementSibling.textContent.trim()
+                : '';
+        };
 
-    return {
-        nome: getField('Nome / Razão Social'),
-        cnpj: getField('CNPJ'),
-        ie: getField('Inscrição Estadual'),
-        endereco: getField('Endereço'),
-        municipio: getField('Município'),
-        uf: getField('UF')
-    };
-}
+        return {
+            nome: getField('Nome / Razão Social'),
+            cnpj: getField('CNPJ'),
+            ie: getField('Inscrição Estadual'),
+            endereco: getField('Endereço'),
+            municipio: getField('Município'),
+            uf: getField('UF')
+        };
+    }
 
     getDadosNfe() {
-        // Extrai os dados principais da NFC-e
         const chaveRow = Array.from(this.doc.querySelectorAll('tr'))
             .find(row => row.textContent.includes('Chave de acesso'));
-        
-        const dados = {
-            chave: chaveRow ? chaveRow.querySelector('td:nth-child(2)').textContent.trim() : '',
-            numero: this.getTextContent('//td[contains(., "Número NFC-e")]/following-sibling::td'),
-            dataEmissao: this.getTextContent('//label[contains(., "Data de Emissão")]/following-sibling::span'),
-            valorTotal: this.getTextContent('//label[contains(., "Valor Total")]/following-sibling::span'),
-            protocolo: this.getTextContent('//span[contains(@id, "nProt")]')
+
+        return {
+            chave: chaveRow ? chaveRow.querySelector('td:nth-child(2)')?.textContent.trim() : '',
+            numero: this.getTextAfterLabel('Número NFC-e'),
+            dataEmissao: this.getTextAfterLabel('Data de Emissão'),
+            valorTotal: this.getTextAfterLabel('Valor Total'),
+            protocolo: this.getTextAfterLabel('Protocolo de autorização')
         };
-        
-        return dados;
     }
 
     getProdutos() {
         const produtos = [];
-        // Encontra todas as linhas de produtos
         const productRows = Array.from(this.doc.querySelectorAll('table.box tr'))
             .filter(row => row.querySelector('.fixo-prod-serv-numero'));
-        
+
         for (const row of productRows) {
-            const numero = row.querySelector('.fixo-prod-serv-numero').textContent.trim();
-            const descricao = row.querySelector('.fixo-prod-serv-descricao').textContent.trim();
-            const quantidadeText = row.querySelector('.fixo-prod-serv-qtd').textContent.trim();
-            const unidade = row.querySelector('.fixo-prod-serv-uc').textContent.trim();
-            const valorText = row.querySelector('.fixo-prod-serv-vb').textContent.trim();
-            
-            // Converte valores para formato numérico
+            const numero = row.querySelector('.fixo-prod-serv-numero')?.textContent.trim() ?? '';
+            const descricao = row.querySelector('.fixo-prod-serv-descricao')?.textContent.trim() ?? '';
+            const quantidadeText = row.querySelector('.fixo-prod-serv-qtd')?.textContent.trim() ?? '0';
+            const unidade = row.querySelector('.fixo-prod-serv-uc')?.textContent.trim() ?? '';
+            const valorText = row.querySelector('.fixo-prod-serv-vb')?.textContent.trim() ?? '0';
+
             const quantidade = parseFloat(quantidadeText.replace('.', '').replace(',', '.'));
             const valorTotal = parseFloat(valorText.replace('.', '').replace(',', '.'));
-            const valorUnitario = valorTotal / quantidade;
-            
-            // Encontra a tabela de detalhes seguinte
-            let detalhesRow = row.nextElementSibling;
-            let ncm = '', codigo = '';
-            
-            while (detalhesRow && !detalhesRow.classList.contains('toggle')) {
-                detalhesRow = detalhesRow.nextElementSibling;
-            }
-            
-            if (detalhesRow && detalhesRow.classList.contains('toggable')) {
-                const spans = detalhesRow.querySelectorAll('label');
-                for (let i = 0; i < spans.length; i++) {
-                    const label = spans[i];
-                    const text = label.textContent.trim();
+            const valorUnitario = quantidade ? valorTotal / quantidade : 0;
 
-                    if (text === 'Código do Produto') {
-                        const span = label.nextElementSibling;
-                        if (span && span.tagName === 'SPAN') {
-                            codigo = span.textContent.trim();
-                        }
-                    }
+            // Pega linha seguinte para buscar Código/NCM
+            const detalhesRow = row.nextElementSibling;
+            const spanMap = {};
 
-                    if (text === 'Código NCM') {
-                        const span = label.nextElementSibling;
-                        if (span && span.tagName === 'SPAN') {
-                            ncm = span.textContent.trim();
-                        }
+            if (detalhesRow) {
+                const labels = detalhesRow.querySelectorAll('label');
+                labels.forEach(label => {
+                    const labelText = label.textContent.trim();
+                    const span = label.nextElementSibling;
+                    if (span && span.tagName.toLowerCase() === 'span') {
+                        spanMap[labelText] = span.textContent.trim();
                     }
-                }
+                });
             }
-            
+
             produtos.push({
                 numero,
-                codigo,
                 descricao,
-                ncm,
+                codigo: spanMap['Código do Produto'] || '',
+                ncm: spanMap['Código NCM'] || '',
                 quantidade: quantidade.toFixed(4),
                 unidade,
                 valorUnitario: valorUnitario.toFixed(2),
                 valorTotal: valorTotal.toFixed(2)
             });
         }
-        
+
         return produtos;
     }
 
-    getTextContent(xpath) {
-        try {
-            const result = this.doc.evaluate(xpath, this.doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-            return result.singleNodeValue ? result.singleNodeValue.textContent.trim() : '';
-        } catch (e) {
-            console.error('XPath error:', e);
-            return '';
-        }
+    getTextAfterLabel(labelText) {
+        const labels = Array.from(this.doc.querySelectorAll('label'));
+        const label = labels.find(l => l.textContent.includes(labelText));
+        return label && label.nextElementSibling
+            ? label.nextElementSibling.textContent.trim()
+            : '';
     }
 
     parse() {
