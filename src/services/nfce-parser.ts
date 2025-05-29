@@ -64,11 +64,12 @@ export class NfceParser {
             valorUnitario: string;
             valorTotal: string;
         }[] = [];
+
         const productRows = Array.from(this.doc.querySelectorAll('table.box tr'))
             .filter((row) => (row as Element).querySelector('.fixo-prod-serv-numero'));
 
         for (const row of productRows as Element[]) {
-            const numero = (row.querySelector('.fixo-prod-serv-numero')?.textContent?.trim()) ?? '';
+            const numero = row.querySelector('.fixo-prod-serv-numero')?.textContent?.trim() ?? '';
             const descricao = row.querySelector('.fixo-prod-serv-descricao')?.textContent?.trim() ?? '';
             const quantidadeText = row.querySelector('.fixo-prod-serv-qtd')?.textContent?.trim() ?? '0';
             const unidade = row.querySelector('.fixo-prod-serv-uc')?.textContent?.trim() ?? '';
@@ -78,26 +79,28 @@ export class NfceParser {
             const valorTotal = parseFloat(valorText.replace('.', '').replace(',', '.'));
             const valorUnitario = quantidade ? valorTotal / quantidade : 0;
 
-            // Pega linha seguinte para buscar Código/NCM
+            // Linha seguinte (detalhes do produto)
             const detalhesRow = row.nextElementSibling;
-            const spanMap = {};
+            let codigoProduto = '';
+            let codigoNcm = '';
 
             if (detalhesRow) {
-                const labels = detalhesRow.querySelectorAll('label');
-                labels.forEach(label => {
-                    const labelText = label.textContent ? label.textContent.trim() : '';
-                    const span = label.nextElementSibling;
-                    if (span && span.tagName.toLowerCase() === 'span') {
-                        spanMap[labelText] = span.textContent ? span.textContent.trim() : '';
+                const spans = detalhesRow.querySelectorAll('td span');
+                for (let i = 0; i < spans.length; i++) {
+                    const label = spans[i].previousElementSibling?.textContent?.trim();
+                    if (label?.includes('Código do Produto')) {
+                        codigoProduto = spans[i].textContent?.trim() ?? '';
+                    } else if (label?.includes('Código NCM')) {
+                        codigoNcm = spans[i].textContent?.trim() ?? '';
                     }
-                });
+                }
             }
 
             produtos.push({
                 numero,
                 descricao,
-                codigo: spanMap['Código do Produto'] || '',
-                ncm: spanMap['Código NCM'] || '',
+                codigo: codigoProduto,
+                ncm: codigoNcm,
                 quantidade: quantidade.toFixed(4),
                 unidade,
                 valorUnitario: valorUnitario.toFixed(2),
