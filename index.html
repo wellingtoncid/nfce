@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor NFC-e para ERP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor NFC-e para ERP</h1>
+        
+        <div class="upload-section">
+            <h2>1. Carregar NFC-e</h2>
+            <input type="file" id="nfceFile" accept=".html,.aspx">
+            <button id="parseBtn">Processar NFC-e</button>
+        </div>
+        
+        <div class="results-section">
+            <h2>2. Resultados</h2>
+            <div id="results">
+                <p>Nenhum arquivo processado ainda.</p>
+            </div>
+            
+            <div class="export-options">
+                <h3>3. Exportar para:</h3>
+                <button id="exportXml">XML para ERP</button>
+                <button id="exportCsv">Planilha CSV</button>
+                <button id="exportExcel">Excel (XLSX)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="parser.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</body>
+</html>
