@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { NfceParser } from './parser'; // ajuste o caminho se necessário
+import { NfceParser } from './services/nfce-parser'; // ajuste o caminho se necessário
 
 const arquivoHtml = path.resolve(__dirname, '../assets/exemplo-nfce.html'); // caminho do seu HTML
 

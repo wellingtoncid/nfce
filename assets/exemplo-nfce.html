@@ -1,0 +1,3732 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head id="Head"><title>
+	Consulta Completa NFC-e - Secretaria da Fazenda - Governo do Estado de São Paulo
+</title>
+
+
+    
+
+    <!-- Main Metas -->
+    <meta charset="utf-8" /><meta name="author" content="humans.txt" />
+    <!-- Ajustar -->
+    <meta name="description" content="Secretaria&#32;da&#32;Fazenda&#32;-&#32;Governo&#32;do&#32;Estado&#32;de&#32;São&#32;Paulo" /><meta name="keywords" content="Secretaria,&#32;Fazenda,&#32;Governo,&#32;Estado,&#32;São&#32;Paulo,&#32;Ambiente&#32;de&#32;Pagamentos,&#32;DARE,&#32;JUCESP" /><meta name="viewport" content="width&#32;=&#32;device-width,&#32;initial-scale&#32;=&#32;1.0,&#32;minimum-scale&#32;=&#32;0.5,&#32;maximum-scale&#32;=&#32;2.0,&#32;user-scalable&#32;=&#32;yes" />
+
+    <!--[if lt IE 9]>
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <![endif]-->
+
+
+    <link rel="shortcut&#32;icon" href="../favicon.ico" type="image/x-icon" /><link rel="icon" type="image/x-icon" href="../favicon.ico" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" media="all" href="../Content/reset.css?v=1.0" /><link rel="stylesheet" media="all" href="../Content/structure.css?v=1.0" title="default" /><link rel="alternate&#32;stylesheet" media="all" href="../Content/contrast.css?v=1.0" title="contrast" /><link rel="stylesheet" media="all" href="../Content/botoes.css?v=1.0" /><link rel="stylesheet" media="all" href="../Xsl/nfe_v310_3/estilos/xslt.css" type="text/css" /><link rel="stylesheet" media="all" href="../Content/sefaz_nfce_complemento.css" type="text/css" /><link href="../Content/consultaPublica/common.css" rel="stylesheet" type="text/css" /><link href="../Content/consultaPublica/internalMaster.css" rel="stylesheet" type="text/css" /><link href="../Content/consultaPublica/consultaPublicaNFe.css" rel="stylesheet" type="text/css" /><link href="../Content/consultaPublica/sistema.css" rel="stylesheet" type="text/css" /><link href="../Content/consultaPublica/nfe-vis.css" rel="stylesheet" type="text/css" /><link href="../Content/themes/blitzer/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" media="all" href="../Content/botoes.css?v=1.0" />
+    <!-- botões -->
+
+    <!-- Edicao do Conteudo -->
+    <link rel="stylesheet" media="all" href="../Content/conteudo.css" />
+
+    <!-- CSS3 Styles -->
+    <link rel="stylesheet" media="all" href="../Content/css3-styles.css?v=1.0" />
+
+    <!--[if IE]>
+            <link rel="stylesheet" media="all" href="../Content/ie-hacks.css?v=1.0" />
+        <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src='/NFCeConsultaPublica/Scripts/html5.js'></script>
+    <![endif]-->
+
+    
+
+
+    <script type="text/javascript">
+        function IniciarDialog() {
+
+            $('#divSucessoMaster').dialog({
+                autoOpen: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Ok": function () {
+                        trigger = "SIM";
+                        $(this).dialog("close");
+                    }
+                },
+                open: function (event, ui) {
+                    $(this).parents(".ui-dialog:first").find(".ui-widget-header").removeClass("ui-widget-header").addClass("ui-widget-header-info");
+                },
+                close: function (event, ui) {
+                    $('#hdfMsgConfirmacao').val("S");
+                    __doPostBack('btnDisparaPageLoad', 'CONFIRMACAO');
+                }
+            });
+
+            $('#divAlertaMaster').dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Ok": function () {
+                        $(this).dialog("close");
+                    }
+                },
+                open: function (event, ui) {
+                    $(this).parents(".ui-dialog:first").find(".ui-widget-header").removeClass("ui-widget-header").addClass("ui-widget-header-info");
+                },
+            });
+
+            $('#divAlertaProsseguirMaster').dialog({
+                autoOpen: false,
+                resizable: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Ok": function () {
+                        __doPostBack('btnDisparaPageLoad', 'PROSSEGUIR');
+                        $(this).dialog("close");
+                    }
+                },
+                open: function (event, ui) {
+                    $(this).parents(".ui-dialog:first").find(".ui-widget-header").removeClass("ui-widget-header").addClass("ui-widget-header-info");
+                },
+            });
+
+            $('#divErroMaster').dialog({
+                autoOpen: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Ok": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $('#divErroProsseguirMaster').dialog({
+                autoOpen: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Ok": function () {
+                        __doPostBack('btnDisparaPageLoad', 'PROSSEGUIR');
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $('#divConfirmaMaster').dialog({
+                autoOpen: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Sim": function () {
+                        trigger = "SIM";
+                        $('#hdfMsgConfirmacao').val("S");
+                        $(this).dialog("close");
+                    },
+                    "Não": function () {
+                        trigger = "NAO";
+                        $('#hdfMsgConfirmacao').val("N");
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    if (trigger == undefined)
+                        $('#hdfMsgConfirmacao').val("N");
+                    __doPostBack('btnDisparaPageLoad', 'CONFIRMACAO');
+                }
+            });
+
+            $('#divConfirmaMasterSair').dialog({
+                autoOpen: false,
+                width: 300,
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    "Sim": function () {
+                        trigger = "SIM";
+                        $('#hdfMsgConfirmacaoSair').val("S");
+                        $(this).dialog("close");
+                    },
+                    "Não": function () {
+                        trigger = "NAO";
+                        $('#hdfMsgConfirmacaoSair').val("N");
+                        $(this).dialog("close");
+                    }
+                },
+                close: function (event, ui) {
+                    if (trigger == undefined)
+                        $("#hdfMsgConfirmacaoSair").val("N");
+                    __doPostBack('btnDisparaPageLoad', 'CONFIRMACAO_SAIR');
+                }
+            });
+        }
+
+        function openDialog(idDialog) {
+            IniciarDialog();
+            $('#' + idDialog).dialog('open');
+        }
+    </script>
+
+<link href="/NFCeConsultaPublica/WebResource.axd?d=gRfIWAYAKStFuv250my4nvIbxUh676Bm9_v_atubTZLC1HU20w2Tob6biAyznt8DmHpBFh57to39iom5WOWNWQppny-Y8wiQDD_7LvQHL5aqCtoUwgG7nMnYk3rmhmrT0&amp;t=638600007780000000" type="text/css" rel="stylesheet" /></head>
+<body>
+    <form method="post" action="v400/ConsultaCompleta.aspx" id="ctl00">
+<div class="aspNetHidden">
+<input type="hidden" name="ctl26_HiddenField" id="ctl26_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="Conteudo_pnlNFe_ClientState" id="Conteudo_pnlNFe_ClientState" value="{&quot;ActiveTabIndex&quot;:0,&quot;TabEnabledState&quot;:[true,true,true,true,true,true,true,true,true],&quot;TabWasLoadedOnceState&quot;:[false,false,false,false,false,false,false,false,false]}" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="bGdkznlQqotkOaUMD1PRu6xIbqsR3hjp3jOepWF5b46r3m2tUuVca4vyLQo7sr/CvsTpr1+7XbTDuwQzREM+qep1hIB0rruKsJRuofaWv8a1S7InA1TsBux4aCizyamP8hiQEKL4aVZg9Pg3ZJUk9V9vKnEE2ieX1Io0m9jox9P3Kwzlf1+2WZn3xVnie0k2EkQHYvEs/qCFMtGI/Ltqm578zYCtpa2cuiVL/lxpcfYOlX2CFDTz/F20YdpXRo1/anwSFN5726R49caxWVt7mwqN3zDw18aPVb+X931+1eu6ENGdtaZvkeB1tclBnWx8DHQfO8ETkoHnOmtrCp4z1E2ccPVSdPdrxKhWYrZCvXXrk1G+Zqd/p/qiXiqoqLxsWRhmEuxL03mKTmU7/ei6j4CcahqgDLDoq7MybWRFIIfy+TZZ/fmCyZHQArhO37CqIdZEztpKmM3m2aA2+mYvUDYN0FmAWCiVQicUZt07I3zq3Xq8YDB6PIaErLAxDgn2kUIR6JUoh1bC4KrRJTrN5zXjghd4HcFXcr7B/qP/8inEcB8QuCicXbk79BjXUkwqusXHAuvp9URB3RQAUowwd62Nkrq+B7UrYqLxyhehyylLqUSP3vrG87lH23Zt7oPMqsjGTBfJIWRakq232JfFvEbF4/VF1u01RUbZ+qldS1IDrWuuqwy7f/bF2VKhCfeIHOzO2WEyc9wODbsko/cPyNyvtYBjaE/MSusQloxRnuy6xatSPgJpdKoYvNQI6sQyKl0pclr8NeIwuWrmqk8utprm83HS1bVC1OCJyqP664wj16vqRBrEj9cvLVN6BlRb2oVQnBKdpucUMJAXnQw6uSXRrSYCb38Gy7glZZTE9jqymhaDsq8oNo6m3PfeY8/5oodyYZY/sYspCKWkFyl//zTIlEofzypsbSEjNSVsqp5ZP4RZw09pdOKApjwB55naZRgGUY5Cp5LJ7Grtbg51iw==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['ctl00'];
+if (!theForm) {
+    theForm = document.ctl00;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/NFCeConsultaPublica/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZKaPA8rduY97EVto9uGHpzHa2VBKO5L8wtvO-f64zvy22nW69agtenlnfbza-HfpYQ2&amp;t=638628099619783110" type="text/javascript"></script>
+
+
+<script src="/NFCeConsultaPublica/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LZkI1i-QHAd9OD0UgN4auycWCqDIU4Uweja1-veozV2DVmz3toyeZcxVEyUxw_iSyLSXTMh1svgXZv_EJSw2mv6QQhM9h1u9mRgBbET9zMg80&amp;t=610a7411" type="text/javascript"></script>
+<script src="/NFCeConsultaPublica/ScriptResource.axd?d=P5lTttoqSeZXoYRLQMIScMxZxInU3LxZsIM0jpFWKhMLbAXDIr3nAA20umBTC5zvaNBwKP_HgQv97pV2ZkG4yNNDybE9Nj8ATtSB8tKNozMCOd0iWmOh3ak0_j97HFoy0&amp;t=610a7411" type="text/javascript"></script>
+<script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="../Scripts/jquery-ui-1.8.24.min.js" type="text/javascript"></script>
+<script src="/NFCeConsultaPublica/bundles/WebFormsJs?v=Fmpof4YW_hu5GitZg8e3W6dXIcQB4aq0W4ynnfJiZp81" type="text/javascript"></script>
+<script src="/NFCeConsultaPublica/Paginas/ConsultaPublica.aspx?_TSM_HiddenField_=ctl26_HiddenField&amp;_TSM_CombinedScripts_=%3B%3BAjaxControlToolkit%2C%20Version%3D4.5.7.429%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D28f01b0e84b6d53e%3Apt-BR%3Ab20ddc19-01a3-41dd-b1ec-7855917d2ecf%3A475a4ef5%3Aeffe2a26%3A8e94f951%3A1d3ed089" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="467C6EAF" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="Rz+SyAGb/3A8oB2JgMnpOsaCew9DmUkTQtACAHfsZLQXcEm4AxWh404fQ1qTr1z92XCzlp9xOBfprR5xpE5TCPWb2KzrlvElxAKMsxBh6D4oFWhqD/wczRlk71LIja5yY02n9totHfjPoz5lj7AJSscdna0sfa18IVF0t2tVXxSnDojCsns7z4IRqdCaVhYQ0OjOHKS69oiaaCrpZnBpMzeJjkztKzDscizdU9Mu5zfp9yVkURfQEqm9BbLeR0Laz5qzs2WMKZ3STaaU4DUcOJH4FLUEsQGQ15DNZLGRE4PFsJlq+XJKRE9SE/Hksj/LFfrGKmGs6/y86QINVxIHkAVo4AdEiktCkB+CzKNB1kw=" />
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ctl26', 'ctl00', ['tctl00$UpdatePanelMensagens','UpdatePanelMensagens'], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+
+        <header id="HeaderSefaz" role="banner" class="naoImprimir">
+
+            <hgroup>
+                <h1 class="hide" title="Secretaria da Fazenda - Governo do Estado de São Paulo">Secretaria da Fazenda - Governo do Estado de São Paulo</h1>
+                <h2 class="naoImprimir" title="Nota Fiscal de Consumidor Eletrônica">Nota Fiscal de Consumidor Eletrônica</h2>
+            </hgroup>
+
+            <!-- accessibility bar -->
+            <nav role="navigation">
+                <span class="hide">Menu de Acesso</span>
+                <ul class="access naoImprimir">
+                    <li class="wheelchair"><a href="#" title="Menu de Acessibilidade"><span></span>Acessibilidade</a></li>
+                    <li class="hide skip-menu"><a href="#menu">Ir para Menu</a></li>
+                    <li class="skip-content"><a href="#ConteudoPrincipal" title="Ir para Conteúdo"><span></span>Ir para Conteúdo</a></li>
+                    <li class="contraste"><a href="#" title="Contraste"><span></span>Contraste</a></li>
+                    <li class="txt-size-menos"><a href="#" class="decreaseFont" title="Diminuir Fonte"><span></span><em class="hide">Tamanho da Fonte: menor</em></a></li>
+                    <li class="txt-size-mais"><a href="#" class="increaseFont" title="Aumentar Fonte"><span></span><em class="hide">Tamanho da Fonte : maior</em></a></li>
+                    
+                </ul>
+            </nav>
+            <!-- /accessibility bar -->
+
+            <!-- Menu Web Form -->
+
+            
+
+            
+            
+
+            <!-- OS ITENS DE MENU PODEM SER ENCONTRADOS NO ARQUIVO WEB.SITEMAP NO ROOT DA APLICAÇÃO -->
+            
+
+            
+
+            
+            
+            
+            <!-- /menu principal -->
+
+            <!-- breadcrumb -->
+            
+            <!-- /breadcrumb -->
+
+            <!-- Div necessária para não 'sumir' o banner do estado de SP quando não tem menu-->
+            
+
+        </header>
+        <!-- END HEADER -->
+
+        <!-- Divs de mensagens - Início -->
+        <div id="UpdatePanelMensagens">
+	
+                <script type="text/javascript">
+                    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+                    Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(LoadRequestHandler);
+                    function EndRequestHandler(sender, args) {
+                        IniciarDialog();
+                    }
+                    function LoadRequestHandler(sender, args) {
+                        IniciarDialog();
+                    }
+                </script>
+                <input type="hidden" name="ctl00$hdfNegacaoAtual" id="hdfNegacaoAtual" />
+                <input type="hidden" name="ctl00$hdfConfirmacaoAtual" id="hdfConfirmacaoAtual" />
+                <input type="hidden" name="ctl00$hdfProsseguimentoAtual" id="hdfProsseguimentoAtual" />
+                <input type="hidden" name="ctl00$hdfMsgConfirmacao" id="hdfMsgConfirmacao" />
+                <input type="hidden" name="ctl00$hdfMsgConfirmacaoSair" id="hdfMsgConfirmacaoSair" />
+                <input type="hidden" name="ctl00$hdfMsgConfirmacaoRecusa" id="hdfMsgConfirmacaoRecusa" />
+            
+</div>
+
+        <input name="ctl00$txtMotivoRecusa" type="text" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$txtMotivoRecusa\&#39;,\&#39;\&#39;)&#39;,&#32;0)" onkeypress="if&#32;(WebForm_TextBoxKeyHandler(event)&#32;==&#32;false)&#32;return&#32;false;" id="txtMotivoRecusa" style="display: none" />
+
+        <div id="divSucessoMaster" title="Sucesso" style="display: none">
+            <strong><span id="spnSucessoMaster" class="corTextoMensagem"></span></strong>
+        </div>
+
+        <div id="divAlertaMaster" title="Alerta" style="display: none">
+            <span id="spnAlertaMaster" class="corTextoMensagem"></span>
+        </div>
+
+        <div id="divAlertaProsseguirMaster" title="Alerta" style="display: none">
+            <span id="spnAlertaProsseguirMaster" class="corTextoMensagem"></span>
+        </div>
+
+        <div id="divConfirmaMaster" title="Confirmar" style="display: none">
+            <strong><span id="spnConfirmar" class="corTextoMensagem"></span></strong>
+        </div>
+
+        <div id="divConfirmaMasterSair" title="Sair" style="display: none">
+            <strong><span id="spnConfirmarSair"></span></strong>
+        </div>
+
+        <div id="divErroMaster" title="Erro" style="display: none">
+            <strong><span id="spnErroMaster" class="corTextoErro"></span></strong>
+        </div>
+
+        <div id="divErroProsseguirMaster" title="Erro" style="display: none">
+            <strong><span id="spnErroProsseguirMaster" class="corTextoErro"></span></strong>
+        </div>
+
+        <div id="divConfirmaRecusaMaster" title="Informar o Motivo do Indeferimento" style="display: none">
+            <textarea name="ctl00$txtMotivoRecusaTemp" rows="10" cols="47" id="txtMotivoRecusaTemp" onblur="copiarValorRecusa(this.value,&#32;10000);" onkeyup="habilitarConfirmaRecusa(this.id)" onkeypress="return&#32;imposeMaxLength(this,&#32;10000);">
+</textarea>
+        </div>
+
+        <input type="submit" name="ctl00$btnDisparaPageLoad" value="" id="btnDisparaPageLoad" style="display: none" />
+        <!-- Divs de mensagens - fim -->
+
+        <!-- CONTAINER -->
+        <section id="ConteudoPrincipal" class="container" role="main">
+            
+    <script src='/NFCeConsultaPublica/Xsl/nfe_v404/scripts/nfe-vis.js'></script>
+    <style>
+        @media print {
+            body {
+                height:99%;
+            }
+        }
+    </style>
+    <div class="pnlDadosNFe2" id="pnlDadosNFCeId">
+        
+<table style="width: 100%; font-size: 85%;" cellspacing="5">
+    <tr>
+        <td style="width: 60%; font-weight: bold;">Chave de acesso</td>
+        <td style="width: 20%; font-weight: bold;">Número NFC-e</td>
+        <td style="width: 20%; font-weight: bold;">Versão XML</td>
+    </tr>
+    <tr style="background-color: #F0F0F0;">
+        <td >35-2505-58.767.855/0001-22-65-002-000.000.504-103.701.267-0</td>
+        <td>000.000.504</td>
+        <td>4.00</td>
+    </tr>
+</table>
+        <br />
+        <div class="ajax__tab_xp" id="Conteudo_pnlNFe" style="visibility:hidden;">
+	<div id="Conteudo_pnlNFe_header" class="ajax__tab_header">
+		<span id="Conteudo_pnlNFe_tabNFe_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabNFe" href="#" style="text-decoration:none;"><span>NFe</span></a></span></span></span><span id="Conteudo_pnlNFe_tabEmitente_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabEmitente" href="#" style="text-decoration:none;"><span>Emitente</span></a></span></span></span><span id="Conteudo_pnlNFe_tabDestinatario_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabDestinatario" href="#" style="text-decoration:none;"><span>Destinatário</span></a></span></span></span><span id="Conteudo_pnlNFe_tabProdServ_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabProdServ" href="#" style="text-decoration:none;"><span>Produtos / Serviços</span></a></span></span></span><span id="Conteudo_pnlNFe_tabTotais_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabTotais" href="#" style="text-decoration:none;"><span>Totais</span></a></span></span></span><span id="Conteudo_pnlNFe_tabTransporte_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabTransporte" href="#" style="text-decoration:none;"><span>Transporte</span></a></span></span></span><span id="Conteudo_pnlNFe_tabCobranca_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabCobranca" href="#" style="text-decoration:none;"><span>Cobrança</span></a></span></span></span><span id="Conteudo_pnlNFe_tabInfAdic_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabInfAdic" href="#" style="text-decoration:none;"><span>Inf. Adicionais</span></a></span></span></span><span id="Conteudo_pnlNFe_tabAvulsa_tab"><span class="ajax__tab_outer"><span class="ajax__tab_inner"><a class="ajax__tab_tab" id="__tab_Conteudo_pnlNFe_tabAvulsa" href="#" style="text-decoration:none;"><span>Avulsa</span></a></span></span></span>
+	</div><div id="Conteudo_pnlNFe_body" class="ajax__tab_body" style="height:100%;display:block;">
+		<div id="Conteudo_pnlNFe_tabNFe" id="Conteudo_pnlNFe_tabNFe" class="ajax__tab_panel">
+			
+                    <div id="NFe" class="GeralXslt">
+  <fieldset>
+    <legend class="titulo-aba">Dados da NF-e</legend>
+    <table class="box">
+      <tr>
+        <td>
+          <label>Modelo</label>
+          <span>65</span>
+        </td>
+        <td>
+          <label>Série</label>
+          <span>2</span>
+        </td>
+        <td>
+          <label>Número</label>
+          <span>504</span>
+        </td>
+        <td>
+          <label>Data de Emissão</label>
+          <span>26/05/2025 14:52:25-03:00</span>
+        </td>
+        <td>
+          <label>
+                      Data Saída/Entrada
+                    </label>
+          <span>
+          </span>
+        </td>
+        <td>
+          <label>Valor Total da Nota Fiscal  </label>
+          <span>2.480,00</span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <fieldset>
+    <legend>Emitente</legend>
+    <table class="box">
+      <tr>
+        <td class="col-5">
+          <label>CNPJ</label>
+          <span>58.767.855/0001-22</span>
+        </td>
+        <td class="col-2">
+          <label>Nome / Razão Social</label>
+          <span>Mundo Colorido LTDA</span>
+        </td>
+        <td class="col-5">
+          <label>Inscrição Estadual</label>
+          <span>152150894119</span>
+        </td>
+        <td class="col-10">
+          <label>UF</label>
+          <span>SP</span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <fieldset>
+    <legend>Emissão</legend>
+    <table class="box">
+      <tr>
+        <td>
+          <label>Processo</label>
+          <span>
+                      0 - com aplicativo do Contribuinte
+                    </span>
+        </td>
+        <td>
+          <label>Versão do Processo</label>
+          <span>4.13</span>
+        </td>
+        <td>
+          <label>
+                Tipo de Emissão</label>
+          <span>1 - Normal</span>
+        </td>
+        <td>
+          <label>Finalidade</label>
+          <span>
+                      1 - Normal
+                    </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Natureza da Operação</label>
+          <span>VENDA CONSUMIDOR</span>
+        </td>
+        <td>
+          <label>Tipo da Operação</label>
+          <span>
+                      1 - Saída
+                    </span>
+        </td>
+        <td>
+          <label>Forma de Pagamento</label>
+          <span>
+          </span>
+        </td>
+        <td>
+          <label>
+            <i>Digest</i> Value da NF-e
+              </label>
+          <span>bF4pYXMovmcIYxA/kf4ff2Sctfg=</span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <fieldset>
+    <legend>
+          Situação Atual:
+          
+            AUTORIZADA
+
+          (Ambiente de autorização:
+           produção)
+        </legend>
+    <table class="box">
+      <tr>
+        <td>
+          <label>Eventos da NF-e</label>
+        </td>
+        <td>
+          <label>Protocolo</label>
+        </td>
+        <td>
+          <label>Data Autorização</label>
+        </td>
+        <td>
+          <label>Data Inclusão BD</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>
+                    Autorização de Uso
+                  </span>
+        </td>
+        <td>
+          <span>135250871865662<input type="hidden" id="nProt" value="135250871865662"></span>
+        </td>
+        <td>
+          <span>26/05/2025 
+        às
+      14:52:26-03:00</span>
+        </td>
+        <td>
+          <span></span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</div>
+                
+		</div><div id="Conteudo_pnlNFe_tabEmitente" id="Conteudo_pnlNFe_tabEmitente" class="ajax__tab_panel" style="display:none;visibility:hidden;">
+			
+                    <div id="Emitente" class="GeralXslt">
+  <fieldset>
+    <legend class="titulo-aba">Dados do Emitente</legend>
+    <table class="box">
+      <tr class="col-2">
+        <td>
+          <label>Nome / Razão Social</label>
+          <span>Mundo Colorido LTDA</span>
+        </td>
+        <td>
+          <label>Nome Fantasia</label>
+          <span>Mundo Colorido LTDA</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>CNPJ</label>
+          <span>58.767.855/0001-22</span>
+        </td>
+        <td>
+          <label>Endereço</label>
+          <span>Rua Julio Ribeiro, 
+                243 
+                Piso 01</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Bairro / Distrito</label>
+          <span>Bras</span>
+        </td>
+        <td>
+          <label>CEP</label>
+          <span>03007-000</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Município</label>
+          <span>3550308
+                -
+                Sao Paulo</span>
+        </td>
+        <td>
+          <label>Telefone</label>
+          <span>(11)93220-1609</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>UF</label>
+          <span>SP</span>
+        </td>
+        <td>
+          <label>País</label>
+          <span>1058
+                    -
+                  Brasil</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Inscrição Estadual</label>
+          <span>152150894119</span>
+        </td>
+        <td>
+          <label>Inscrição Estadual do Substituto Tributário</label>
+          <span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Inscrição Municipal</label>
+          <span></span>
+        </td>
+        <td>
+          <label>Município da Ocorrência do Fato Gerador do ICMS</label>
+          <span>3550308</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>CNAE Fiscal</label>
+          <span></span>
+        </td>
+        <td>
+          <label>Código de Regime Tributário</label>
+          <span>
+                      1 - Simples Nacional
+                    </span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</div>
+                
+		</div><div id="Conteudo_pnlNFe_tabDestinatario" id="Conteudo_pnlNFe_tabDestinatario" class="ajax__tab_panel" style="display:none;visibility:hidden;">
+			
+                    <div id="DestRem" op="1" class="GeralXslt">
+  <fieldset>
+    <legend class="titulo-aba">Dados do Destinatário</legend>
+    <table class="box">
+      <tr class="col-2">
+        <td colspan="3">
+          <label>Nome / Razão Social</label>
+          <span></span>
+        </td>
+      </tr>
+      <tr class="col-2">
+        <td colspan="2">
+          <label>CNPJ/CPF/Id. Estrangeiro</label>
+          <span></span>
+        </td>
+        <td>
+          <label>Endereço</label>
+          <span> 
+                  </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label>Bairro / Distrito</label>
+          <span></span>
+        </td>
+        <td>
+          <label>CEP</label>
+          <span>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label>Município</label>
+          <span></span>
+        </td>
+        <td>
+          <label>Telefone</label>
+          <span>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label>UF</label>
+          <span></span>
+        </td>
+        <td>
+          <label>País</label>
+          <span>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:25%">
+          <label>Indicador IE</label>
+          <span></span>
+        </td>
+        <td style="width:25%">
+          <label>Inscrição Estadual</label>
+          <span></span>
+        </td>
+        <td style="width:50%">
+          <label>Inscrição SUFRAMA</label>
+          <span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>IM</label>
+          <span></span>
+        </td>
+        <td colspan="2">
+          <label>E-mail</label>
+          <span></span>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</div>
+                
+		</div><div id="Conteudo_pnlNFe_tabProdServ" id="Conteudo_pnlNFe_tabProdServ" class="ajax__tab_panel" style="display:none;visibility:hidden;">
+			
+                    <div id="Prod" class="GeralXslt">
+  <fieldset>
+    <legend class="titulo-aba">Dados dos Produtos e Serviços</legend>
+    <div>
+      <table class="prod-serv-header box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <label>Num.</label>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <label>Descrição</label>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <label>Qtd.</label>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <label>Unidade Comercial</label>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <label>Valor(R$)</label>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>1</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>DIAMOND PAINTING CAPIVARA XL3136 XL1003</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>12,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>60,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>4507</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>49030000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>12,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>12,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>5,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>5,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,60</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>12,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,60</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>12,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>2</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>KIT ESCOLAR C60188</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>22,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>132,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3490</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39261000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>22,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>22,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>1,32</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>22,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>1,32</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>22,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>3</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>CORRETIVO CAPIVARA XDZ23</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>20,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>60,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3249</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>38249929</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>20,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>20,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>3,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>3,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,60</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>20,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,60</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>20,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>4</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>KIT ESCOLAR LAPIS BORRACHA E APONTADOR SEREIA HOMEM ARANHA YP8234 YP8378</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>24,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>144,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>4659</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>96091000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>24,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>24,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>1,44</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>24,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>1,44</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>24,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>5</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>CESTO MULTIUSO PLASTICO SAM7623</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>6,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>30,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3097</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39249000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>6,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>6,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>5,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>5,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,30</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>6,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,30</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>6,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>6</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>MINI CESTA ORGANIZADORA CT8192</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>16,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>64,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3103</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39261000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>16,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>16,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>4,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>4,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,64</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>16,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,64</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>16,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>7</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>MASSA PULA E MOLDA TURMA DA MONICA 70G REF123048</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>10,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>100,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3466</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>34070010</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>10,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>10,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>10,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>10,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>1,00</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>10,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>1,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>10,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>8</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>PORTA CANETAS VAZADO REDONDO CTR2319</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>22,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>88,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3082</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>83040000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>22,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>22,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>4,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>4,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,88</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>22,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,88</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>22,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>9</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>KIT COM 3 CANETAS TY1583</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>13,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>78,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>3803</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>96082000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>13,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>13,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>6,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,78</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>13,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,78</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>13,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>10</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>BORRACHA DIY TRAFFIC QH8305 JQXPC117</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>1,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>7,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>2042</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39261000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>1,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>1,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>7,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>7,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,07</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>1,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,07</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>1,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr>
+          <td class="fixo-prod-serv-numero">
+            <span>11</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>BORRACHA TRAFFIC QH8346 JQXPC111</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>1,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>8,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>2041</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39261000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>1,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>1,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>8,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>8,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,08</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+                        </td>
+                      </tr>
+                    </table>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">PIS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>1,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0100</span>
+                          </td>
+                          <td>
+                            <label>Valor do PIS</label>
+                            <span>0,08</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend class="toggle">COFINS</legend>
+                    <div class="toggable">
+                      <table class="box">
+                        <tr class="col-3">
+                          <td colspan="3">
+                            <label>CST</label>
+                            <span>99 - Outras Operações</span>
+                          </td>
+                        </tr>
+                        <tr class="col-3">
+                          <td>
+                            <label>Quantidade Vendida</label>
+                            <span>1,0000</span>
+                          </td>
+                          <td>
+                            <label>Alíquota (R$)</label>
+                            <span>0,0000</span>
+                          </td>
+                          <td>
+                            <label>Valor</label>
+                            <span>0,00</span>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </fieldset>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="12">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table class="toggle box">
+        <tr class="highlighted">
+          <td class="fixo-prod-serv-numero">
+            <span>12</span>
+          </td>
+          <td class="fixo-prod-serv-descricao">
+            <span>KIT BORRACHAS VARIADAS AS106 AS110 XPC184</span>
+          </td>
+          <td class="fixo-prod-serv-qtd">
+            <span>4,0000</span>
+          </td>
+          <td class="fixo-prod-serv-uc">
+            <span>UN</span>
+          </td>
+          <td class="fixo-prod-serv-vb">
+            <span>28,00</span>
+          </td>
+        </tr>
+      </table>
+      <table class="toggable box" style="background-color:#ECECEC">
+        <tr>
+          <td>
+            <table class="box">
+              <tr class="col-4">
+                <td colspan="4">
+                  <label>Código do Produto</label>
+                  <span>2338</span>
+                </td>
+                <td colspan="2">
+                  <label>Código NCM</label>
+                  <span>39261000</span>
+                </td>
+                <td colspan="2">
+                  <label>Código CEST</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Indicador de Escala Relevante</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CNPJ do Fabricante da Mercadoria</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Código de Benefício Fiscal na UF</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EX da TIPI</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>CFOP</label>
+                  <span>5102</span>
+                </td>
+                <td colspan="4">
+                  <label>Outras Despesas Acessórias</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor do Desconto</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor Total do Frete</label>
+                  <span>
+                  </span>
+                </td>
+                <td colspan="4">
+                  <label>Valor do Seguro</label>
+                  <span>
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table class="box">
+              <tr class="col-12">
+                <td colspan="12">
+                  <label>
+                          Indicador de Composição do Valor Total da NF-e
+                        </label>
+                  <span>
+                              1 - O valor do item (vProd) compõe o valor total da NF-e (vProd)
+                            </span>
+                </td>
+              </tr>
+              <tr class="col-3">
+                <td colspan="4">
+                  <label>Código EAN Comercial</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Comercial</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Comercial</label>
+                  <span>4,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Código EAN Tributável</label>
+                  <span>SEM GTIN</span>
+                </td>
+                <td colspan="4">
+                  <label>Unidade Tributável</label>
+                  <span>UN</span>
+                </td>
+                <td colspan="4">
+                  <label>Quantidade Tributável</label>
+                  <span>4,0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Valor unitário de comercialização</label>
+                  <span>7,0000000000</span>
+                </td>
+                <td colspan="4">
+                  <label>Valor unitário de tributação</label>
+                  <span>7,0000000000</span>
+                </td>
+                <td colspan="4">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td colspan="4">
+                  <label>Item do pedido de compra</label>
+                  <span></span>
+                </td>
+                <td>
+                  <label>Valor Aproximado dos Tributos</label>
+                  <span>0,28</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <label>Número da FCI</label>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <fieldset>
+                    <legend>ICMS Normal e ST</legend>
+                    <table class="box">
+                      <tr class="col-3">
+                        <td>
+                          <label>Origem da Mercadoria</label>
+                          <span>0 - Nacional</span>
+                        </td>
+                        <td>
+                          <label>Código de Situação da Operação - Simples Nacional</label>
+                          <span>
+                102 - Tributada pelo Simples Nacional sem permissão de crédito
+              </span>
+        

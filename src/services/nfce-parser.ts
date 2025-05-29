@@ -10,7 +10,7 @@ export class NfceParser {
 
     getEmitente() {
         const fieldsets = this.doc.querySelectorAll('fieldset');
-        let emitenteSection = null;
+        let emitenteSection: Element | null = null;
 
         fieldsets.forEach(fieldset => {
             const legend = fieldset.querySelector('legend');
@@ -22,10 +22,11 @@ export class NfceParser {
         if (!emitenteSection) return {};
 
         const getField = (labelText) => {
+            if (!emitenteSection) return '';
             const label = Array.from(emitenteSection.querySelectorAll('label'))
-                .find(el => el.textContent.includes(labelText));
+                .find(el => el.textContent && el.textContent.includes(labelText));
             return label && label.nextElementSibling
-                ? label.nextElementSibling.textContent.trim()
+                ? (label.nextElementSibling.textContent ?? '').trim()
                 : '';
         };
 
@@ -40,11 +41,11 @@ export class NfceParser {
     }
 
     getDadosNfe() {
-        const chaveRow = Array.from(this.doc.querySelectorAll('tr'))
-            .find(row => row.textContent.includes('Chave de acesso'));
+        const chaveRow = Array.from(this.doc.querySelectorAll('tr') as NodeListOf<Element>)
+            .find(row => row.textContent?.includes('Chave de acesso'));
 
         return {
-            chave: chaveRow ? chaveRow.querySelector('td:nth-child(2)')?.textContent.trim() : '',
+            chave: chaveRow ? (chaveRow.querySelector('td:nth-child(2)')?.textContent?.trim() ?? '') : '',
             numero: this.getTextAfterLabel('Número NFC-e'),
             dataEmissao: this.getTextAfterLabel('Data de Emissão'),
             valorTotal: this.getTextAfterLabel('Valor Total'),
@@ -53,16 +54,25 @@ export class NfceParser {
     }
 
     getProdutos() {
-        const produtos = [];
+        const produtos: {
+            numero: string;
+            descricao: string;
+            codigo: string;
+            ncm: string;
+            quantidade: string;
+            unidade: string;
+            valorUnitario: string;
+            valorTotal: string;
+        }[] = [];
         const productRows = Array.from(this.doc.querySelectorAll('table.box tr'))
-            .filter(row => row.querySelector('.fixo-prod-serv-numero'));
+            .filter((row) => (row as Element).querySelector('.fixo-prod-serv-numero'));
 
-        for (const row of productRows) {
-            const numero = row.querySelector('.fixo-prod-serv-numero')?.textContent.trim() ?? '';
-            const descricao = row.querySelector('.fixo-prod-serv-descricao')?.textContent.trim() ?? '';
-            const quantidadeText = row.querySelector('.fixo-prod-serv-qtd')?.textContent.trim() ?? '0';
-            const unidade = row.querySelector('.fixo-prod-serv-uc')?.textContent.trim() ?? '';
-            const valorText = row.querySelector('.fixo-prod-serv-vb')?.textContent.trim() ?? '0';
+        for (const row of productRows as Element[]) {
+            const numero = (row.querySelector('.fixo-prod-serv-numero')?.textContent?.trim()) ?? '';
+            const descricao = row.querySelector('.fixo-prod-serv-descricao')?.textContent?.trim() ?? '';
+            const quantidadeText = row.querySelector('.fixo-prod-serv-qtd')?.textContent?.trim() ?? '0';
+            const unidade = row.querySelector('.fixo-prod-serv-uc')?.textContent?.trim() ?? '';
+            const valorText = row.querySelector('.fixo-prod-serv-vb')?.textContent?.trim() ?? '0';
 
             const quantidade = parseFloat(quantidadeText.replace('.', '').replace(',', '.'));
             const valorTotal = parseFloat(valorText.replace('.', '').replace(',', '.'));
@@ -75,10 +85,10 @@ export class NfceParser {
             if (detalhesRow) {
                 const labels = detalhesRow.querySelectorAll('label');
                 labels.forEach(label => {
-                    const labelText = label.textContent.trim();
+                    const labelText = label.textContent ? label.textContent.trim() : '';
                     const span = label.nextElementSibling;
                     if (span && span.tagName.toLowerCase() === 'span') {
-                        spanMap[labelText] = span.textContent.trim();
+                        spanMap[labelText] = span.textContent ? span.textContent.trim() : '';
                     }
                 });
             }
@@ -99,10 +109,10 @@ export class NfceParser {
     }
 
     getTextAfterLabel(labelText) {
-        const labels = Array.from(this.doc.querySelectorAll('label'));
-        const label = labels.find(l => l.textContent.includes(labelText));
+        const labels = Array.from(this.doc.querySelectorAll('label')) as Element[];
+        const label = labels.find((l) => !!l && typeof l.textContent === 'string' && l.textContent.includes(labelText));
         return label && label.nextElementSibling
-            ? label.nextElementSibling.textContent.trim()
+            ? (label.nextElementSibling.textContent ?? '').trim()
             : '';
     }
 
